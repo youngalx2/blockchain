@@ -2,9 +2,9 @@
 #include <ctime>
 #include <vector>
 
-#include "headers/TransactionData.h"
-#include "headers/Blockchain.h"
-#include "headers/Block.h"
+#include "TransactionData.h"
+#include "Blockchain.h"
+#include "Block.h"
 
 using namespace std;
 
@@ -12,10 +12,12 @@ int main()
 {
     Blockchain tinchocoin;
 
+     cout << "Mining block 1" << endl;
     time_t dataTime;
     TransactionData data(1.5, "Pepe", "Botella", time(&dataTime));
     tinchocoin.addBlock(data);
 
+     cout << "Mining block 2" << endl;
     time_t dataTime2;
     TransactionData data2(0.00013322, "Alberto", "Bolaños", time(&dataTime2));
     tinchocoin.addBlock(data2);

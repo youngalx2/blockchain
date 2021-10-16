@@ -2,14 +2,15 @@
 #include <ctime>
 #include <string>
 
-#include "headers/Block.h"
-#include "headers/Blockchain.h"
+#include "Block.h"
+#include "Blockchain.h"
 
 #include <vector>
 
 Blockchain::Blockchain()
 {
     Block genesis = createGenesisBlock();
+    difficulty = 4;
     chain.push_back(genesis);
 }
 
@@ -24,7 +25,7 @@ Block Blockchain::createGenesisBlock()
 
     TransactionData data(0, "Genesis", "Genesis", time(&current));
 
-    Block genesis(0, data, 0);
+    Block genesis(0, data, "0");
     return genesis;
 }
 
@@ -36,8 +37,9 @@ Block* Blockchain::getLatestBlock()
 void Blockchain::addBlock(TransactionData data)
 {
     int index = (int)chain.size();
-    std::size_t previousHash = (int)chain.size() > 0 ? getLatestBlock()->getHash() : 0;
+    std::string previousHash = (int)chain.size() > 0 ? getLatestBlock()->getHash() : "0";
     Block newBlock(index, data, previousHash);
+    newBlock.mineBlock(difficulty);
     chain.push_back(newBlock);
 }
 
@@ -78,8 +80,8 @@ void Blockchain::printChain()
         printf("\nSenderKey: %s", currentBlock.data.senderKey.c_str());
         printf("\nReceiverKey: %s", currentBlock.data.receiverKey.c_str());
         printf("\nTimestamp: %ld", currentBlock.data.timestamp);
-        printf("\nHash: %zu", currentBlock.getHash());
-        printf("\nPrevious Hash: %zu", currentBlock.getPreviousHash());
+        printf("\nHash: %s", currentBlock.getHash().c_str());
+        printf("\nPrevious Hash: %s", currentBlock.getPreviousHash().c_str());
         printf("\nIs block valid?: %d", currentBlock.isHashValid());
     }
 }
