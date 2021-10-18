@@ -2,8 +2,8 @@
 #include <ctime>
 #include <string>
 
-#include "Block.h"
-#include "Blockchain.h"
+#include "include/Block.h"
+#include "include/Blockchain.h"
 
 #include <vector>
 
@@ -85,3 +85,6 @@ void Blockchain::printChain()
         printf("\nIs block valid?: %d", currentBlock.isHashValid());
     }
 }
+
+void Blockchain::replaceChain(Blockchain blockchian)
+{}

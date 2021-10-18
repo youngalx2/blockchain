@@ -2,11 +2,9 @@
 #include <string>
 #include <openssl/sha.h>
 #include "Block.h"
-#include "TransactionData.h"
+#include "include/TransactionData.h"
 
-using namespace std;
-
-Block::Block(int index, TransactionData data, string previousHash)
+Block::Block(int index, TransactionData data, std::string previousHash)
 {
     this->nonce = 0;
     this->index = index;
@@ -20,7 +18,7 @@ int Block::getIndex()
     return index;
 }
 
-string Block::generateHash()
+std::string Block::generateHash()
 {
     std::string toHashS = std::to_string(index) + previousHash + std::to_string(data.amount) + data.receiverKey + data.senderKey + std::to_string(data.timestamp) + std::to_string(nonce);
     char result[65];
@@ -28,12 +26,12 @@ string Block::generateHash()
     return std::string(result);
 }
 
-string Block::getHash()
+std::string Block::getHash()
 {
     return blockHash;
 }
 
-string Block::getPreviousHash()
+std::string Block::getPreviousHash()
 {
     return previousHash;
 }
@@ -60,7 +58,7 @@ void Block::sha256_string(const char* input, char output[65])
 
 void Block::mineBlock(int difficulty)
 {
-    string prefix = "";
+    std::string prefix = "";
     for(int i = 0; i < difficulty; i++)
     {
         prefix += "0";

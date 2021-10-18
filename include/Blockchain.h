@@ -19,6 +19,7 @@ class Blockchain
         bool isChainValid();
         void addBlock(TransactionData data);
         void printChain();
+        void replaceChain(Blockchain blockchin);
 };
 
 #endif

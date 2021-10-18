@@ -4,24 +4,23 @@
 #include <string>
 
 #include "TransactionData.h"
-using namespace std;
 
 class Block
 {
     private:
         int index;
         double nonce;
-        string blockHash;
-        string previousHash;
-        string generateHash();
+        std::string blockHash;
+        std::string previousHash;
+        std::string generateHash();
         void sha256_string(const char* input, char output[65]);
 
     public:
-        Block(int index, TransactionData data, string previousHas);
+        Block(int index, TransactionData data, std::string previousHas);
 
         int getIndex();
-        string getHash();
-        string getPreviousHash();
+        std::string getHash();
+        std::string getPreviousHash();
         void mineBlock(int difficulty);
 
         TransactionData data;
