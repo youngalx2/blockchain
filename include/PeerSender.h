@@ -10,11 +10,14 @@
 #include <regex.h>
 #include <thread>
 #include <iostream>
+#include <map>
 #include "Blockchain.h"
+#include "Command.h"
 
 class PeerSender
 {
 private:
+	std::map<std::string, std::function<std::unique_ptr<Command>()>> commands;
 	std::string SenderName ="";
 	int SenderPort=0;
 	int sockfd=0,portno=0;
@@ -22,14 +25,12 @@ private:
 	struct hostent *server;
 	char buffer[256]={0};
 	char ip[INET_ADDRSTRLEN]={0};
-	char *receive=NULL;
     std::shared_ptr<Blockchain> blockchain;
 	void GetPrompt(char *cmd);
-	void GetListOfFiles(char**,int);
-	void ReceiveAndDownload(int SOCKET);
 
 public:
 	PeerSender(std::shared_ptr<Blockchain> blockchain);
+	~PeerSender();
 	void RegisterPeer(std::string hostname, int port);
 	void FileDownload();
 };

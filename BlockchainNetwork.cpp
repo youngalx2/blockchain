@@ -5,14 +5,22 @@
 BlockchainNetwork::BlockchainNetwork(std::string hostname, int port, std::shared_ptr<Blockchain> blockchain)
     : me(hostname, port)
 {
-    this->blockchain = std::move(blockchain);
+    this->blockchain = blockchain;
     // adding some test peers
-    for (int i = 5000; i < 5; i++)
+    for (int i = 50000; i < 50002; i++)
     {
         if(i != port)
         {
             peers.push_back(Peer("localhost", i));
         }
+    }
+}
+
+BlockchainNetwork::~BlockchainNetwork()
+{
+    for (auto &thread : threads)
+    {
+        thread.~thread();
     }
 }
 
@@ -31,23 +39,14 @@ int BlockchainNetwork::getPort()
     return this->me.port;
 }
 
-void BlockchainNetwork::startNetwork(std::string mode)
+void BlockchainNetwork::startNetwork()
 {
-    if (mode == "Receiver")
+    threads.push_back(std::thread (StartThePeerReceiver, getHostName(), getPort(), blockchain));
+    
+    for (Peer peer : peers)
     {
-        std::thread PeerReceiver(StartThePeerReceiver, getHostName(), getPort(), blockchain);
-        PeerReceiver.join();
-    } 
-    else if (mode == "Sender")
-    {
-        std::thread StartTheSender(StartThePeerSender, getHostName(), getPort(), blockchain);
-        StartTheSender.join();
+        threads.push_back(std::thread (StartThePeerSender, peer.hostname, peer.port, blockchain));
     }
-    else
-    {
-        throw std::invalid_argument("Invalid mode");
-    }
-
 }
 
 void BlockchainNetwork::StartThePeerReceiver(std::string hostName, int port, std::shared_ptr<Blockchain> blockchain)
@@ -58,8 +57,15 @@ void BlockchainNetwork::StartThePeerReceiver(std::string hostName, int port, std
 
 void BlockchainNetwork::StartThePeerSender(std::string hostName, int port, std::shared_ptr<Blockchain> blockchain)
 {
-	sleep(1);
-	std::unique_ptr<PeerSender> send(new PeerSender(blockchain));
-	send->RegisterPeer(hostName, port);
-	send->FileDownload();
+    try
+    {
+        sleep(10);
+        std::unique_ptr<PeerSender> send(new PeerSender(blockchain));
+        send->RegisterPeer(hostName, port);
+        send->FileDownload();
+    }
+    catch(std::exception& e)
+    {
+        printf("Error reaching peer %s:%i. Error: %s \n", hostName.c_str(), port, e.what());
+    }
 }

@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <string>
 #include <openssl/sha.h>
-#include "Block.h"
+#include "include/Block.h"
+#include "include/Color.h"
 #include "include/TransactionData.h"
+#include "include/StringHelper.h"
 
 Block::Block(int index, TransactionData data, std::string previousHash)
 {
@@ -70,4 +72,27 @@ void Block::mineBlock(int difficulty)
         blockHash = generateHash();
     }
 
+}
+
+std::string Block::serialize()
+{
+    return std::to_string(index) + SERIALIZATION_DELIMITER + 
+        blockHash + SERIALIZATION_DELIMITER + 
+        previousHash + SERIALIZATION_DELIMITER +
+        std::to_string(data.amount) + SERIALIZATION_DELIMITER +
+        data.receiverKey + SERIALIZATION_DELIMITER +
+        data.senderKey + SERIALIZATION_DELIMITER +
+        std::to_string(data.timestamp) + SERIALIZATION_DELIMITER +
+        std::to_string(nonce);
+}
+
+Block Block::deserialize(std::string serialized)
+{
+    std::vector<std::string> parts = StringHelper::split(serialized, SERIALIZATION_DELIMITER);
+    Block block(std::stoi(parts[0]), TransactionData(std::stoi(parts[3]), parts[5], parts[4], std::strtoul(parts[6].c_str(), NULL, 0)), parts[2]);
+
+    block.nonce = std::stoi(parts[7]);
+    block.blockHash = parts[1];
+
+    return block;
 }

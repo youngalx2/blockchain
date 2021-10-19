@@ -10,7 +10,7 @@ class Blockchain
         Block createGenesisBlock();
         std::vector<Block> chain;
         int difficulty;
-    
+        bool isChainValid(std::vector<Block> blocks);
     public:
         Blockchain();
 
@@ -19,7 +19,9 @@ class Blockchain
         bool isChainValid();
         void addBlock(TransactionData data);
         void printChain();
-        void replaceChain(Blockchain blockchin);
+        bool replaceChain(std::vector<Block> chain);
+        std::string serialize();
+        static std::vector<Block> deserialize(std::string serialized);
 };
 
 #endif

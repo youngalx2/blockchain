@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <ctime>
 #include <string>
-
+#include "include/StringHelper.h"
 #include "include/Block.h"
 #include "include/Blockchain.h"
 
@@ -45,9 +45,14 @@ void Blockchain::addBlock(TransactionData data)
 
 bool Blockchain::isChainValid()
 {
+    return isChainValid(chain);
+}
+
+bool Blockchain::isChainValid(std::vector<Block> blocks)
+{
     std::vector<Block>::iterator it;
 
-    for(it = chain.begin(); it != chain.end(); ++it)
+    for(it = blocks.begin(); it != blocks.end(); ++it)
     {
         Block currentBlock = *it;
         if(!currentBlock.isHashValid())
@@ -55,7 +60,7 @@ bool Blockchain::isChainValid()
             return false;
         }
 
-        if(it != chain.begin())
+        if(it != blocks.begin())
         {
             Block previousBlock = *(it - 1);
             if(currentBlock.getPreviousHash() != previousBlock.getHash())
@@ -86,5 +91,38 @@ void Blockchain::printChain()
     }
 }
 
-void Blockchain::replaceChain(Blockchain blockchian)
-{}
+bool Blockchain::replaceChain(std::vector<Block> chain)
+{
+    if(isChainValid(chain) && chain.size() > this->chain.size())
+    {
+        this->chain = chain;
+        return true;
+    }
+
+    return false;
+}
+
+std::string Blockchain::serialize()
+{
+    std::string serializedChain = "";
+    for (auto &block : chain)
+    {
+        serializedChain += block.serialize();
+        serializedChain += "\n";
+    }
+
+    return serializedChain;
+}
+
+std::vector<Block> Blockchain::deserialize(std::string serialized)
+{
+    std::vector<std::string> blocks = StringHelper::split(serialized, "\n");
+    std::vector<Block> deserializedChain;
+
+    for (auto &block : blocks)
+    {
+        deserializedChain.push_back(Block::deserialize(block));
+    }
+
+    return deserializedChain;
+}
