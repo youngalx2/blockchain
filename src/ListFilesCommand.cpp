@@ -4,7 +4,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/socket.h>
-#include "include/commands/ListFilesCommand.h"
+#include "../include/commands/ListFilesCommand.h"
 
 ListFilesCommand::ListFilesCommand()
     :Command()

@@ -4,7 +4,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/socket.h>
-#include "include/commands/GetFilesListCommand.h"
+#include "../include/commands/GetFilesListCommand.h"
 
 GetFilesListCommand::GetFilesListCommand()
     : Command()

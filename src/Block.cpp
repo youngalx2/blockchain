@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <string>
 #include <openssl/sha.h>
-#include "include/Block.h"
-#include "include/Color.h"
-#include "include/TransactionData.h"
-#include "include/StringHelper.h"
+#include "../include/Block.h"
+#include "../include/Color.h"
+#include "../include/TransactionData.h"
+#include "../include/StringHelper.h"
 
 Block::Block(int index, TransactionData data, std::string previousHash)
 {

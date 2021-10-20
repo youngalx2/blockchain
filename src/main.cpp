@@ -6,12 +6,12 @@
 #include <memory>
 #include <exception>
 
-#include "include/TransactionData.h"
-#include "include/Blockchain.h"
-#include "include/Block.h"
-#include "include/PeerReceiver.h"
-#include "include/PeerSender.h"
-#include "include/BlockchainNetwork.h"
+#include "../include/TransactionData.h"
+#include "../include/Blockchain.h"
+#include "../include/Block.h"
+#include "../include/PeerReceiver.h"
+#include "../include/PeerSender.h"
+#include "../include/BlockchainNetwork.h"
 
 int main(int argc, char **argv)
 {

@@ -1,5 +1,5 @@
 #include <sys/socket.h>
-#include "include/commands/ReadFileCommand.h"
+#include "../include/commands/ReadFileCommand.h"
 
 ReadFileCommand::ReadFileCommand()
 : Command()

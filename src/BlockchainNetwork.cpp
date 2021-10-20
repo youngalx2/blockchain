@@ -1,6 +1,6 @@
-#include "include/BlockchainNetwork.h"
-#include "include/PeerReceiver.h"
-#include "include/PeerSender.h"
+#include "../include/BlockchainNetwork.h"
+#include "../include/PeerReceiver.h"
+#include "../include/PeerSender.h"
 
 BlockchainNetwork::BlockchainNetwork(std::string hostname, int port, std::shared_ptr<Blockchain> blockchain)
     : me(hostname, port)

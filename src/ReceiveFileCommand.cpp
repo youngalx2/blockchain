@@ -1,6 +1,6 @@
 #include <iostream>
 #include <sys/socket.h>
-#include "include/commands/ReceiveFileCommand.h"
+#include "../include/commands/ReceiveFileCommand.h"
 
 ReceiveFileCommand::ReceiveFileCommand()
     : Command()

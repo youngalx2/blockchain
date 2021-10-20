@@ -1,11 +1,11 @@
-#include "include/PeerSender.h"
-#include "include/Color.h"
-#include "include/Blockchain.h"
-#include "include/commands/GetFilesListCommand.h"
-#include "include/commands/ReceiveFileCommand.h"
-#include "include/commands/PrintBlockchainCommand.h"
-#include "include/commands/CreateTransactionCommand.h"
-#include "include/commands/ReplaceBlockchainCommand.h"
+#include "../include/PeerSender.h"
+#include "../include/Color.h"
+#include "../include/Blockchain.h"
+#include "../include/commands/GetFilesListCommand.h"
+#include "../include/commands/ReceiveFileCommand.h"
+#include "../include/commands/PrintBlockchainCommand.h"
+#include "../include/commands/CreateTransactionCommand.h"
+#include "../include/commands/ReplaceBlockchainCommand.h"
 #include <errno.h>
 
 PeerSender::PeerSender(std::shared_ptr<Blockchain> blockchain)

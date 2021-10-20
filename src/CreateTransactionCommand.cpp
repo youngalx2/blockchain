@@ -1,7 +1,7 @@
 #include <ctime>
-#include "include/commands/CreateTransactionCommand.h"
-#include "include/TransactionData.h"
-#include "include/StringHelper.h"
+#include "../include/commands/CreateTransactionCommand.h"
+#include "../include/TransactionData.h"
+#include "../include/StringHelper.h"
 
 CreateTransactionCommand::CreateTransactionCommand(std::shared_ptr<Blockchain> blockchain)
 : BlockchainCommand(blockchain)

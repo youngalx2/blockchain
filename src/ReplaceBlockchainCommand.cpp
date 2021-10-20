@@ -1,8 +1,8 @@
 #include <iostream>
-#include "include/Color.h"
+#include "../include/Color.h"
 #include <sys/socket.h>
-#include "include/commands/ReplaceBlockchainCommand.h"
-#include "include/Blockchain.h"
+#include "../include/commands/ReplaceBlockchainCommand.h"
+#include "../include/Blockchain.h"
 
 ReplaceBlockchainCommand::ReplaceBlockchainCommand(std::shared_ptr<Blockchain> blockchain)
     : BlockchainCommand(blockchain)

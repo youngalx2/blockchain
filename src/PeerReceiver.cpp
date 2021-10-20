@@ -1,5 +1,5 @@
-#include "include/PeerReceiver.h"
-#include "include/commands/GetBlockchainCommand.h"
+#include "../include/PeerReceiver.h"
+#include "../include/commands/GetBlockchainCommand.h"
 
 PeerReceiver::PeerReceiver(std::string receiverName, int receiverPort, std::shared_ptr<Blockchain> blockchain){
 	this->ReceiverName = receiverName;

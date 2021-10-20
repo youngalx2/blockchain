@@ -1,5 +1,5 @@
 #include <sstream>
-#include "include/StringHelper.h"
+#include "../include/StringHelper.h"
 
 std::vector<std::string> StringHelper::splitBySpace(const std::string str)
 {

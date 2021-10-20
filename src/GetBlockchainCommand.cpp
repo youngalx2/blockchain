@@ -1,6 +1,6 @@
 #include <iostream>
 #include <sys/socket.h>
-#include "include/commands/GetBlockchainCommand.h"
+#include "../include/commands/GetBlockchainCommand.h"
 
 GetBlockchainCommand::GetBlockchainCommand(std::shared_ptr<Blockchain> blockchain)
     : BlockchainCommand(blockchain)

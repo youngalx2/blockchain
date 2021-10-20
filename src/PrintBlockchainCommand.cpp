@@ -1,4 +1,4 @@
-#include "include/commands/PrintBlockchainCommand.h"
+#include "../include/commands/PrintBlockchainCommand.h"
 
 PrintBlockchainCommand::PrintBlockchainCommand(std::shared_ptr<Blockchain> blockchain)
     : BlockchainCommand(blockchain)

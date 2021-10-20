@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <ctime>
 #include <string>
-#include "include/StringHelper.h"
-#include "include/Block.h"
-#include "include/Blockchain.h"
+#include "../include/StringHelper.h"
+#include "../include/Block.h"
+#include "../include/Blockchain.h"
 
 #include <vector>
 
